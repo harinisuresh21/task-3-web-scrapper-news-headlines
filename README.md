@@ -44,12 +44,12 @@ bash
 python headlines_scraper.py
 The top headlines will be saved to a file named headlines.txt.
 
-###📁 Output Example
+##📁 Output Example
 1. PM addresses the nation on latest reforms
 2. India wins the series against Australia
 3. Tech companies release new AI features
 
-###✅ Project Outcome
+##✅ Project Outcome
 Gained hands-on experience with web scraping
 Learned to parse HTML tags using BeautifulSoup
 Practiced saving clean data to .txt files
