@@ -1,19 +1,30 @@
 import requests
 from bs4 import BeautifulSoup
 
-# Step 1: Get the page content
-url = "https://indianexpress.com/"
-response = requests.get(url)
+# Target news website (change this if needed)
+URL = 'https://indianexpress.com/'
 
-# Step 2: Parse the HTML
-soup = BeautifulSoup(response.text, "html.parser")
+# Send HTTP GET request
+response = requests.get(URL)
+html_content = response.text
 
-# Step 3: Find all headline tags
-headlines = soup.find_all('h3')  # usually news headlines are in <h3> tags
+# Parse HTML
+soup = BeautifulSoup(html_content, 'html.parser')
 
-# Step 4: Print and save them
-with open("headlines.txt", "w", encoding="utf-8") as file:
-    for headline in headlines:
-        text = headline.get_text(strip=True)
-        print(text)
-        file.write(text + "\n")
+# Find all <h3> headline tags (depends on the website structure)
+headlines = soup.find_all('h3')  # Try 'h2' or 'span' if h3 doesn't work
+
+# Create a list to store extracted headlines
+extracted_headlines = []
+
+for idx, headline in enumerate(headlines):
+    text = headline.get_text(strip=True)
+    if text:
+        extracted_headlines.append(f"{idx+1}. {text}")
+
+# Save to a text file
+with open("headlines.txt", "w", encoding='utf-8') as f:
+    for line in extracted_headlines:
+        f.write(line + "\n")
+
+print("✅ Headlines have been saved to headlines.txt")
